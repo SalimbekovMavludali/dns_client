@@ -8,7 +8,7 @@ from .dnssec import validate_dnssec_chain
 
 class DNSClient:
     def __init__(self, resolvers: list[str], cache_size: int = 4096, rate: float = 10.0, dnssec: bool = False):
-        enpoints = [ResolverEndpoint(host=h) for h in resolvers]
+        endpoints = [ResolverEndpoint(host=h) for h in resolvers]
         self.resolver = AsyncMultiResolver(endpoints)
         self.cache = AsyncLRUCache(maxsize=cache_size)
         self.limiter = TokenBucket(rate=rate)
