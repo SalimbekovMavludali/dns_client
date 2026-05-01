@@ -37,7 +37,7 @@ def decode_dns_name(data: bytes, offset: int, max_jumps: int=2) -> tuple[str, in
         elif (length & 0xC0) == 0xC0:
             if jumps >= max_jumps:
                 raise ValueError("DNS compression loop detected")
-            pointer = struct.unpack_from("!H", data, offset[0]) & 0x3FFF
+            pointer = struct.unpack_from("!H", data, offset)[0] & 0x3FFF
             if jumps == 0:
                 original_offset = offset + 2
             offset = pointer
@@ -106,4 +106,4 @@ def parse_dns_response(data: bytes, expected_id: int) -> dict:
         rdlength = struct.unpack_from("!H", data, offset - 2)[0]
         offset += rdlength
 
-    return {"anwsers": answers, "flags": flags, "ancount": ancount}
+    return {"answers": answers, "flags": flags, "ancount": ancount}

@@ -1,6 +1,6 @@
 import asyncio
-from .client import DNSClient
-from .protocol import QTYPE
+from client import DNSClient
+from protocol import QTYPE
 
 async def main():
     client = DNSClient(
