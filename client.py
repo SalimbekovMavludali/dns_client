@@ -1,9 +1,9 @@
 import asyncio
-from .protocol import build_dns_query, parse_dns_response, QTYPE
-from .cache import AsyncLRUCache
-from .limiter import TokenBucket
-from .resolver import AsyncMultiResolver, ResolverEndpoint
-from .dnssec import validate_dnssec_chain
+from protocol import build_dns_query, parse_dns_response, QTYPE
+from cache import AsyncLRUCache
+from limiter import TokenBucket
+from resolver import AsyncMultiResolver, ResolverEndpoint
+from dnssec import validate_dnssec_chain
 
 
 class DNSClient:
@@ -34,4 +34,4 @@ class DNSClient:
         return result["answers"]
     
     async def close(self):
-        await self.resolver.close()
+        await self.resolver.cleanup()
